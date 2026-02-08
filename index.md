@@ -7,6 +7,8 @@ The emphasis is on **investigation, decision-making, documentation, and detectio
 
 **Status:** In progress (actively maintained)  
 **Last updated:** 2026-02-08
+**Primary scenario:** Living-off-the-land PowerShell execution with scheduled task persistence.  
+(Full details: [Incident Scenario](scenario.md))
 
 ## Focus Areas
 - SIEM alert triage and prioritization
