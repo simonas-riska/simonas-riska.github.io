@@ -185,6 +185,113 @@ A community-maintained Sysmon configuration (sysmon-modular by Olaf Hartong) was
 
 *Figure 26: Event Viewer showing Sysmon Process Create (Event ID 1) confirming telemetry collection.*
 
+## Security Monitoring Platform (Wazuh SIEM / EDR)
+
+To centralize endpoint telemetry and support alert-driven incident response workflows, a dedicated security monitoring platform was deployed using **Wazuh**.
+
+Wazuh was selected to provide:
+- Centralized log ingestion and correlation
+- Endpoint security monitoring (EDR-like visibility)
+- Alerting and severity classification
+- MITRE ATT&CK mapping to support structured analysis
+- A realistic SOC-style investigation interface
+
+The platform was deployed on a separate Linux system to simulate a typical enterprise separation between monitored endpoints and security monitoring infrastructure.
+
+---
+
+## Wazuh Server Deployment
+
+### Operating System
+
+A dedicated **Ubuntu Server 24.04 LTS** virtual machine was deployed to host the Wazuh components.
+
+- Ubuntu Server 24.04 (LTS)
+- Minimal installation
+- Dedicated VM acting as a security monitoring node
+- Network connectivity to the monitored Windows endpoint
+
+The system was intentionally kept minimal to reduce noise and maintain focus on security monitoring functionality rather than general-purpose server services.
+
+---
+
+### Wazuh Installation
+
+Wazuh version **4.14.2** was installed using the official Wazuh installation assistant, which deploys and configures all required components in a single-node architecture.
+
+Installed components included:
+- **Wazuh Manager** – log analysis, rules, decoders, and alert generation
+- **Wazuh Indexer** – event indexing and search backend
+- **Wazuh Dashboard** – web-based SOC interface for investigation and analysis
+- **Filebeat** – log shipping between components
+
+The installation process automatically generated and configured TLS certificates to secure communication between Wazuh components.
+
+![Wazuh installation process output](images/wazuh-installation-output.png)
+
+*Figure 27: Wazuh installation assistant executing and deploying core components.*
+
+Upon completion, all Wazuh services were verified to be running successfully.
+
+![Wazuh dashboard service status](images/wazuh-dashboard-service-status.png)
+
+*Figure 28: Wazuh Dashboard service verified as active and running.*
+
+---
+
+### Network Exposure and Dashboard Access
+
+The Wazuh Dashboard listens on HTTPS port **443** on the Ubuntu server.  
+To allow access from the analyst workstation, port forwarding was configured on the virtualization platform.
+
+- Host port: 8443  
+- Guest port: 443  
+- Protocol: TCP  
+
+This configuration allowed secure access to the Wazuh Dashboard from the analyst system without exposing the VM directly to the external network.
+
+![Port forwarding configuration](images/wazuh-port-forwarding.png)
+
+*Figure 29: NAT port forwarding configured to expose the Wazuh Dashboard.*
+
+---
+
+### Wazuh Dashboard Validation
+
+After installation and network configuration, access to the Wazuh Dashboard was successfully established via a web browser.
+
+![Wazuh login page](images/wazuh-login-page.png)
+
+*Figure 30: Wazuh Dashboard login page accessed via forwarded HTTPS port.*
+
+Following authentication, the main dashboard interface loaded successfully, confirming that all core Wazuh components were operational.
+
+![Wazuh dashboard overview](images/wazuh-dashboard-overview.png)
+
+*Figure 31: Wazuh Dashboard overview showing platform readiness prior to agent enrollment.*
+
+At this stage:
+- No agents were registered
+- No endpoint telemetry had been ingested
+- The platform was in a clean, pre-incident state
+
+This clean SIEM baseline was intentionally preserved to ensure that all subsequent alerts and findings could be clearly attributed to the simulated incident activity.
+
+---
+
+## Agent Enrollment Preparation
+
+With the Wazuh platform operational, the environment was prepared for endpoint agent enrollment.
+
+The next phase of the lab focuses on:
+- Deploying the Wazuh agent on the Windows endpoint
+- Verifying ingestion of Windows Event Logs and Sysmon telemetry
+- Confirming alert generation and MITRE ATT&CK mapping
+- Establishing an alert-driven starting point for the incident investigation
+
+At this point, the lab transitions from **telemetry preparation** to **active security monitoring**, enabling realistic SOC-style detection and response workflows.
+
+
 
 
 
