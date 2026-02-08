@@ -72,6 +72,9 @@ This account was created to support realistic privilege separation during invest
 
 *Figure 4: Verification that the user is a member of the local Users group only.*
 
+</details>
+
+<details>
 <summary>Local administrator account creation screenshots</summary>
 
 ![Administrator account creation](images/admin-account-create.png)
@@ -81,7 +84,6 @@ This account was created to support realistic privilege separation during invest
 ![Administrator group assignment](images/admin-account-groups.png)
 
 *Figure 6: Verification that the account is a member of the local Administrators group.*
-
 </details>
 
 
