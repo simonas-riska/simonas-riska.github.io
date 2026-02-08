@@ -66,6 +66,17 @@ The following configuration was applied:
 
 This configuration ensures that Security Event ID 4688 includes full command-line arguments, allowing reconstruction of execution intent during incident analysis.
 
+## PowerShell Logging Configuration
+
+Enhanced PowerShell logging was enabled on the endpoint to provide deep visibility into PowerShell-based execution during the simulated incident scenario.
+
+The configuration was designed to ensure that:
+- PowerShell script contents are captured, including dynamically generated and decoded commands
+- Module-level activity is logged to support investigation of living-off-the-land techniques
+- PowerShell events can be correlated with process creation, user context, and persistence mechanisms
+
+Both **Script Block Logging** and **Module Logging** were enabled via Local Group Policy.
+
 ## Appendix: Endpoint Deployment Evidence
 
 <details>
@@ -133,6 +144,39 @@ This configuration ensures that Security Event ID 4688 includes full command-lin
 *Manual execution used to generate a test process creation event.*
 
 </details>
+
+</details>
+
+<details>
+<summary>PowerShell logging configuration and verification</summary>
+
+![PowerShell policy path](images/gpo-powershell-policy-path.png)
+
+*Figure: Local Group Policy Editor path for PowerShell logging configuration.*
+
+![Script Block Logging enabled](images/ps-scriptblock-logging-policy-enabled.png)
+
+*Figure: PowerShell Script Block Logging enabled via Local Group Policy.*
+
+![Module Logging enabled](images/ps-module-logging-policy-enabled.png)
+
+*Figure: PowerShell Module Logging policy enabled.*
+
+![Module Logging wildcard configuration](images/ps-module-logging-enabled-wildcard.png)
+
+*Figure: PowerShell Module Logging configured with wildcard (`*`) to capture all module activity.*
+
+![Group Policy update applied](images/cmd-gpupdate-force-executed.png)
+
+*Figure: Group Policy update executed to apply PowerShell logging settings.*
+
+![PowerShell test command execution](images/ps-test-command-executed.png)
+
+*Figure: Manual PowerShell command execution used to generate logging events.*
+
+![PowerShell Script Block event details](images/eventviewer-powershell-scriptblock-event-details.png)
+
+*Figure: PowerShell Operational log showing Script Block event details with captured command content.*
 
 </details>
 
