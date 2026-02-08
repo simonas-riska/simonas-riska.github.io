@@ -46,6 +46,16 @@ A separate local administrator account was created to represent privileged acces
 
 This account was created to support realistic privilege separation during investigation, including analysis of execution context, potential privilege escalation attempts, and differentiation between standard and administrative activity.
 
+## Windows Event Logging
+
+Default Windows Event Logging was confirmed to be enabled on the endpoint, including the following log channels:
+
+- Security
+- System
+- Application
+
+These logs provide core visibility into authentication events, system changes, service activity, and application-level errors, and form the baseline telemetry for subsequent investigation and correlation with enhanced logging sources.
+
 ## Appendix: Endpoint Deployment Evidence
 
 <details>
