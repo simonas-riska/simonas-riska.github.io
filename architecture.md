@@ -42,6 +42,14 @@ A standard local user account was created to simulate a typical corporate end-us
 
 The account was intentionally not granted administrative privileges to reflect a common enterprise workstation configuration and to support realistic privilege boundaries and execution context during investigation.
 
+![Standard user account creation](images/user-account-create.png)
+
+*Figure 3: Creation of a standard local user account for the lab endpoint.*
+
+![User group membership](images/user-account-groups.png)
+
+*Figure 4: Verification that the user is a member of the local Users group only.*
+
 ### Local Administrator Account
 
 A separate local administrator account was created to represent privileged access on the endpoint.
@@ -52,6 +60,14 @@ A separate local administrator account was created to represent privileged acces
 
 This account was created to support realistic privilege separation during investigation, including analysis of execution context, potential privilege escalation attempts, and differentiation between standard and administrative activity.
 
+![Administrator account creation](images/admin-account-create.png)
+
+*Figure 5: Creation of a dedicated local administrator account for the lab endpoint.*
+
+![Administrator group assignment](images/admin-account-groups.png)
+
+*Figure 6: Verification that the account is a member of the local Administrators group.*
+
 ## Windows Event Logging
 
 Default Windows Event Logging was confirmed to be enabled on the endpoint, including the following log channels:
@@ -61,6 +77,26 @@ Default Windows Event Logging was confirmed to be enabled on the endpoint, inclu
 - Application
 
 These logs provide core visibility into authentication events, system changes, service activity, and application-level errors, and form the baseline telemetry for subsequent investigation and correlation with enhanced logging sources.
+
+![Command-line logging policy enabled](images/gpo-command-line-enabled.png)
+
+*Figure 7: Command-line inclusion enabled for process creation audit events.*
+
+![Audit Process Creation policy](images/audit-process-creation.png)
+
+*Figure 8: Local Security Policy showing Audit Process Creation enabled.*
+
+![Group Policy update](images/gpupdate-force.png)
+
+*Figure 9: Policy refresh to apply updated audit settings.*
+
+![whoami execution](images/whoami-execution.png)
+
+*Figure 10: Manual execution used to generate a test process creation event.*
+
+![Event 4688 with command-line captured](images/event4688-commandline.png)
+
+*Figure 11: Security Event ID 4688 showing command-line arguments and user context.*
 
 ## Process Command-Line Logging
 
@@ -90,74 +126,6 @@ To extend endpoint telemetry beyond default Windows logging, Sysmon (System Moni
 A community-maintained Sysmon configuration (sysmon-modular by Olaf Hartong) was used as a baseline to enable useful detections while keeping noise manageable. After installation, Sysmon service status was verified and telemetry generation was validated by performing a controlled user action (opening Notepad) and confirming the corresponding Sysmon event in Event Viewer.
 
 ## Appendix: Endpoint Deployment Evidence
-
-<details>
-<summary>Windows 11 Enterprise deployment screenshots</summary>
-
-![Windows 11 Enterprise VM created from official ISO](images/win11-vm-iso.png)
-
-*Figure 1: Windows 11 Enterprise ISO selected during virtual machine creation.*
-
-![Clean Windows 11 desktop after installation](images/win11-desktop.png)
-
-*Figure 2: Clean Windows 11 Enterprise endpoint baseline prior to telemetry and agent installation.*
-
-</details>
-
-<details>
-<summary>Standard user account creation screenshots</summary>
-
-![Standard user account creation](images/user-account-create.png)
-
-*Figure 3: Creation of a standard local user account for the lab endpoint.*
-
-![User group membership](images/user-account-groups.png)
-
-*Figure 4: Verification that the user is a member of the local Users group only.*
-
-</details>
-
-<details>
-<summary>Local administrator account creation screenshots</summary>
-
-![Administrator account creation](images/admin-account-create.png)
-
-*Figure 5: Creation of a dedicated local administrator account for the lab endpoint.*
-
-![Administrator group assignment](images/admin-account-groups.png)
-
-*Figure 6: Verification that the account is a member of the local Administrators group.*
-</details>
-
-<details>
-<summary>Process command-line logging configuration and verification</summary>
-
-![Command-line logging policy enabled](images/gpo-command-line-enabled.png)
-
-*Figure 7: Command-line inclusion enabled for process creation audit events.*
-
-![Event 4688 with command-line captured](images/event4688-commandline.png)
-
-*Figure 8: Security Event ID 4688 showing command-line arguments and user context.*
-
-<details>
-<summary>Extended configuration steps (learning reference)</summary>
-
-![Audit Process Creation policy](images/audit-process-creation.png)
-
-*Local Security Policy showing Audit Process Creation enabled.*
-
-![Group Policy update](images/gpupdate-force.png)
-
-*Policy refresh to apply updated audit settings.*
-
-![whoami execution](images/whoami-execution.png)
-
-*Manual execution used to generate a test process creation event.*
-
-</details>
-
-</details>
 
 <details>
 <summary>PowerShell logging configuration and verification</summary>
