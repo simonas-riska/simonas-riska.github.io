@@ -119,6 +119,34 @@ The configuration was designed to ensure that:
 
 Both **Script Block Logging** and **Module Logging** were enabled via Local Group Policy.
 
+![PowerShell policy path](images/gpo-powershell-policy-path.png)
+
+*Figure 12: Local Group Policy Editor path for PowerShell logging configuration.*
+
+![Script Block Logging enabled](images/ps-scriptblock-logging-policy-enabled.png)
+
+*Figure 13: PowerShell Script Block Logging enabled via Local Group Policy.*
+
+![Module Logging enabled](images/ps-module-logging-policy-enabled.png)
+
+*Figure 14: PowerShell Module Logging policy enabled.*
+
+![Module Logging wildcard configuration](images/ps-module-logging-enabled-wildcard.png)
+
+*Figure 15: PowerShell Module Logging configured with wildcard (`*`) to capture all module activity.*
+
+![Group Policy update applied](images/cmd-gpupdate-force-executed.png)
+
+*Figure 16: Group Policy update executed to apply PowerShell logging settings.*
+
+![PowerShell test command execution](images/ps-test-command-executed.png)
+
+*Figure 17: Manual PowerShell command execution used to generate logging events.*
+
+![PowerShell Script Block event details](images/eventviewer-powershell-scriptblock-event-details.png)
+
+*Figure 18: PowerShell Operational log showing Script Block event details with captured command content.*
+
 ## Sysmon Telemetry (Enhanced Endpoint Logging)
 
 To extend endpoint telemetry beyond default Windows logging, Sysmon (System Monitor) was installed on the Windows VM. Sysmon provides additional high-value security events (e.g., process creation with richer metadata) that support incident investigation and timeline reconstruction.
@@ -127,38 +155,6 @@ A community-maintained Sysmon configuration (sysmon-modular by Olaf Hartong) was
 
 ## Appendix: Endpoint Deployment Evidence
 
-<details>
-<summary>PowerShell logging configuration and verification</summary>
-
-![PowerShell policy path](images/gpo-powershell-policy-path.png)
-
-*Figure: Local Group Policy Editor path for PowerShell logging configuration.*
-
-![Script Block Logging enabled](images/ps-scriptblock-logging-policy-enabled.png)
-
-*Figure: PowerShell Script Block Logging enabled via Local Group Policy.*
-
-![Module Logging enabled](images/ps-module-logging-policy-enabled.png)
-
-*Figure: PowerShell Module Logging policy enabled.*
-
-![Module Logging wildcard configuration](images/ps-module-logging-enabled-wildcard.png)
-
-*Figure: PowerShell Module Logging configured with wildcard (`*`) to capture all module activity.*
-
-![Group Policy update applied](images/cmd-gpupdate-force-executed.png)
-
-*Figure: Group Policy update executed to apply PowerShell logging settings.*
-
-![PowerShell test command execution](images/ps-test-command-executed.png)
-
-*Figure: Manual PowerShell command execution used to generate logging events.*
-
-![PowerShell Script Block event details](images/eventviewer-powershell-scriptblock-event-details.png)
-
-*Figure: PowerShell Operational log showing Script Block event details with captured command content.*
-
-</details>
 
 <details>
 <summary>Sysmon installation and verification</summary>
