@@ -56,6 +56,16 @@ Default Windows Event Logging was confirmed to be enabled on the endpoint, inclu
 
 These logs provide core visibility into authentication events, system changes, service activity, and application-level errors, and form the baseline telemetry for subsequent investigation and correlation with enhanced logging sources.
 
+## Process Command-Line Logging
+
+Process command-line logging was enabled to enhance visibility into process execution details during investigation.
+
+The following configuration was applied:
+- Audit Process Creation enabled (Success)
+- Command-line arguments included in process creation events
+
+This configuration ensures that Security Event ID 4688 includes full command-line arguments, allowing reconstruction of execution intent during incident analysis.
+
 ## Appendix: Endpoint Deployment Evidence
 
 <details>
@@ -95,5 +105,36 @@ These logs provide core visibility into authentication events, system changes, s
 
 *Figure 6: Verification that the account is a member of the local Administrators group.*
 </details>
+
+<details>
+<summary>Process command-line logging configuration and verification</summary>
+
+![Command-line logging policy enabled](images/gpo-command-line-enabled.png)
+
+*Figure 7: Command-line inclusion enabled for process creation audit events.*
+
+![Event 4688 with command-line captured](images/event4688-commandline.png)
+
+*Figure 8: Security Event ID 4688 showing command-line arguments and user context.*
+
+<details>
+<summary>Extended configuration steps (learning reference)</summary>
+
+![Audit Process Creation policy](images/audit-process-creation.png)
+
+*Local Security Policy showing Audit Process Creation enabled.*
+
+![Group Policy update](images/gpupdate-force.png)
+
+*Policy refresh to apply updated audit settings.*
+
+![whoami execution](images/whoami-execution.png)
+
+*Manual execution used to generate a test process creation event.*
+
+</details>
+
+</details>
+
 
 
