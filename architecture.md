@@ -77,6 +77,12 @@ The configuration was designed to ensure that:
 
 Both **Script Block Logging** and **Module Logging** were enabled via Local Group Policy.
 
+## Sysmon Telemetry (Enhanced Endpoint Logging)
+
+To extend endpoint telemetry beyond default Windows logging, Sysmon (System Monitor) was installed on the Windows VM. Sysmon provides additional high-value security events (e.g., process creation with richer metadata) that support incident investigation and timeline reconstruction.
+
+A community-maintained Sysmon configuration (sysmon-modular by Olaf Hartong) was used as a baseline to enable useful detections while keeping noise manageable. After installation, Sysmon service status was verified and telemetry generation was validated by performing a controlled user action (opening Notepad) and confirming the corresponding Sysmon event in Event Viewer.
+
 ## Appendix: Endpoint Deployment Evidence
 
 <details>
@@ -177,6 +183,43 @@ Both **Script Block Logging** and **Module Logging** were enabled via Local Grou
 ![PowerShell Script Block event details](images/eventviewer-powershell-scriptblock-event-details.png)
 
 *Figure: PowerShell Operational log showing Script Block event details with captured command content.*
+
+</details>
+
+<details>
+<summary>Sysmon installation and verification</summary>
+
+![Sysmon download page (Microsoft Sysinternals)](images/sysmon-download-page.png)
+
+*Figure: Official Sysmon documentation/download source used for acquisition.*
+
+![Extracted Sysmon binaries](images/sysmon-binaries-extracted.png)
+
+*Figure: Sysmon package extracted to a dedicated directory on the endpoint.*
+
+![sysmon-modular configuration repository](images/sysmon-modular-github-repository.png)
+
+*Figure: sysmon-modular repository used as the baseline Sysmon configuration source.*
+
+![Sysmon configuration copied to Sysmon directory](images/sysmon-config-copied-to-sysmon-dir.png)
+
+*Figure: Sysmon configuration file placed in the Sysmon installation directory.*
+
+![Sysmon installation command executed](images/sysmon-install-command-executed.png)
+
+*Figure: Sysmon installed with configuration applied from an elevated command prompt.*
+
+![Sysmon service running](images/sysmon-service-running.png)
+
+*Figure: Sysmon64 service verified as running after installation.*
+
+![Telemetry validation: Notepad opened](images/sysmon-test-notepad-opened.png)
+
+*Figure: Controlled user action (opening Notepad) used to generate a Sysmon Process Create event.*
+
+![Sysmon Process Create event for Notepad](images/eventviewer-sysmon-processcreate-notepad.png)
+
+*Figure: Event Viewer showing Sysmon Process Create (Event ID 1) confirming telemetry collection.*
 
 </details>
 
