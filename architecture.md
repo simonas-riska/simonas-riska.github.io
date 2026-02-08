@@ -26,6 +26,8 @@ This baseline was preserved to ensure all observed activity during the incident 
 
 ## User Accounts
 
+### Standard Local User Account
+
 A standard local user account was created to simulate a typical corporate end-user context for the incident scenario.
 
 - Username: employee1
@@ -33,6 +35,16 @@ A standard local user account was created to simulate a typical corporate end-us
 - Local group membership: Users
 
 The account was intentionally not granted administrative privileges to reflect a common enterprise workstation configuration and to support realistic privilege boundaries and execution context during investigation.
+
+### Local Administrator Account
+
+A separate local administrator account was created to represent privileged access on the endpoint.
+
+- Username: admin1
+- Account type: Local administrator
+- Local group membership: Administrators
+
+This account was created to support realistic privilege separation during investigation, including analysis of execution context, potential privilege escalation attempts, and differentiation between standard and administrative activity.
 
 ## Appendix: Endpoint Deployment Evidence
 
@@ -60,4 +72,16 @@ The account was intentionally not granted administrative privileges to reflect a
 
 *Figure 4: Verification that the user is a member of the local Users group only.*
 
+<summary>Local administrator account creation screenshots</summary>
+
+![Administrator account creation](images/admin-account-create.png)
+
+*Figure 5: Creation of a dedicated local administrator account for the lab endpoint.*
+
+![Administrator group assignment](images/admin-account-groups.png)
+
+*Figure 6: Verification that the account is a member of the local Administrators group.*
+
 </details>
+
+
