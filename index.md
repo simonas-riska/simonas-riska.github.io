@@ -5,6 +5,9 @@ This site documents a realistic Incident Response home lab focused on SOC and DF
 
 The emphasis is on **investigation, decision-making, documentation, and detection improvement**, not on offensive exploitation.
 
+**Status:** In progress (actively maintained)  
+**Last updated:** 2026-02-08
+
 ## Focus Areas
 - SIEM alert triage and prioritization
 - Windows endpoint investigations
